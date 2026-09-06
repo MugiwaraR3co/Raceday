@@ -110,3 +110,12 @@ The Participant can:
 - Enter events by selecting a category
 - View their enrolments
 - Track their personal results
+## Part 1 Deliverables
+
+Part 1 consists of three main planning and database deliverables:
+
+1. Entity Relationship Diagram (ERD)
+2. API Endpoint Plan
+3. SQL Database Script
+
+These documents are stored inside the `docs` folder.
