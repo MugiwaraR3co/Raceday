@@ -119,3 +119,9 @@ Part 1 consists of three main planning and database deliverables:
 3. SQL Database Script
 
 These documents are stored inside the `docs` folder.
+## Repository Structure
+
+- `.github/workflows/` - GitHub Actions workflow
+- `docs/` - Part 1 planning and database documentation
+- `Evidence/` - screenshots and supporting evidence
+- `README.md` - project documentation
