@@ -146,3 +146,14 @@ request body and expected response for each endpoint.
 The completed plan is available in:
 
 `docs/RaceDay_API_Endpoint_Plan.md`
+
+## Database
+
+The SQL database script creates the database structure required by RaceDay.
+It defines tables, primary keys, foreign keys and appropriate constraints.
+
+The script also provides sample data for testing the database.
+
+The completed SQL script is available in:
+
+`docs/RaceDay_Database.sql`
