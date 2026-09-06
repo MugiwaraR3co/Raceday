@@ -125,3 +125,13 @@ These documents are stored inside the `docs` folder.
 - `docs/` - Part 1 planning and database documentation
 - `Evidence/` - screenshots and supporting evidence
 - `README.md` - project documentation
+## ERD
+
+The RaceDay ERD represents the relational database structure required by the
+system. It identifies the entities, attributes, primary keys, foreign keys
+and relationships required to support organisers, participants, events,
+categories, enrolments and results.
+
+The completed ERD is available in:
+
+`docs/RaceDay_ERD.png`
