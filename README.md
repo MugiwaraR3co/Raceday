@@ -90,3 +90,23 @@ road running, walking, and cycling community.
 The system allows Organisers to manage events, categories, participants,
 enrolments and results, while Participants can browse events, enter events,
 view their enrolments and track their results.
+## User Roles
+
+### Organiser
+
+The Organiser can:
+- Create events
+- Edit events
+- Delete events
+- Manage event categories
+- Capture participant results
+- View event enrolments
+
+### Participant
+
+The Participant can:
+- Create an account
+- Browse events
+- Enter events by selecting a category
+- View their enrolments
+- Track their personal results
