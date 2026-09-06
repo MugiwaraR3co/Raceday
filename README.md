@@ -135,3 +135,14 @@ categories, enrolments and results.
 The completed ERD is available in:
 
 `docs/RaceDay_ERD.png`
+## API Endpoint Plan
+
+The API endpoint plan defines the RESTful endpoints required by the RaceDay
+system.
+
+The plan specifies the HTTP method, route, description, role required,
+request body and expected response for each endpoint.
+
+The completed plan is available in:
+
+`docs/RaceDay_API_Endpoint_Plan.md`
