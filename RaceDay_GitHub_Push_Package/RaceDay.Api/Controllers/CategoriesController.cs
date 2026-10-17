@@ -1,0 +1,10 @@
+using Microsoft.AspNetCore.Authorization;using Microsoft.AspNetCore.Mvc;using Microsoft.EntityFrameworkCore;using RaceDay.Api.Data;using RaceDay.Api.DTOs;using RaceDay.Api.Models;using RaceDay.Api.Services;
+namespace RaceDay.Api.Controllers;
+[ApiController,Route("api/categories")]
+public class CategoriesController(RaceDayContext db):ControllerBase{
+ [HttpGet,AllowAnonymous,ProducesResponseType(typeof(IEnumerable<CategoryResponse>),200)] public async Task<IActionResult> All()=>Ok(await db.Categories.AsNoTracking().OrderBy(x=>x.DistanceKm).Select(x=>new CategoryResponse(x.CategoryID,x.CategoryName,x.DistanceKm,x.CreatedByUserID)).ToListAsync());
+ [HttpGet("{id:int}"),AllowAnonymous,ProducesResponseType(typeof(CategoryResponse),200),ProducesResponseType(404)] public async Task<IActionResult> Get(int id){var c=await db.Categories.FindAsync(id);return c is null?NotFound():Ok(c.ToResponse());}
+ [HttpPost,Authorize(Roles="Organiser"),ProducesResponseType(typeof(CategoryResponse),201)] public async Task<IActionResult> Create(CategoryRequest r){var c=new Category{CategoryName=r.CategoryName.Trim(),DistanceKm=r.DistanceKm,CreatedByUserID=User.CurrentUserId()};db.Categories.Add(c);await db.SaveChangesAsync();return CreatedAtAction(nameof(Get),new{id=c.CategoryID},c.ToResponse());}
+ [HttpPut("{id:int}"),Authorize(Roles="Organiser"),ProducesResponseType(typeof(CategoryResponse),200),ProducesResponseType(404)] public async Task<IActionResult> Update(int id,CategoryRequest r){var c=await db.Categories.FindAsync(id);if(c is null)return NotFound();c.CategoryName=r.CategoryName.Trim();c.DistanceKm=r.DistanceKm;await db.SaveChangesAsync();return Ok(c.ToResponse());}
+ [HttpDelete("{id:int}"),Authorize(Roles="Organiser"),ProducesResponseType(204),ProducesResponseType(404)] public async Task<IActionResult> Delete(int id){var c=await db.Categories.Include(x=>x.EventCategories).FirstOrDefaultAsync(x=>x.CategoryID==id);if(c is null)return NotFound();if(c.EventCategories.Count>0)return Conflict(new{message="Cannot delete a category already linked to an event."});db.Categories.Remove(c);await db.SaveChangesAsync();return NoContent();}
+}

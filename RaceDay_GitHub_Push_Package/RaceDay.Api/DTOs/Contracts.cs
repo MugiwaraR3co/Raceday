@@ -1,0 +1,18 @@
+using System.ComponentModel.DataAnnotations;
+namespace RaceDay.Api.DTOs;
+public record RegisterRequest([Required,MaxLength(100)] string FirstName,[Required,MaxLength(100)] string LastName,[Required,EmailAddress,MaxLength(255)] string Email,[Required,MinLength(8),MaxLength(100)] string Password);
+public record LoginRequest([Required,EmailAddress] string Email,[Required] string Password);
+public record UserResponse(int UserID,string FirstName,string LastName,string Email,string Role,string CreatedAt);
+public record AuthResponse(string AccessToken,string TokenType,DateTime ExpiresAt,UserResponse User);
+public record UpdateProfileRequest([Required,MaxLength(100)] string FirstName,[Required,MaxLength(100)] string LastName,[Required,EmailAddress,MaxLength(255)] string Email);
+public record ChangePasswordRequest([Required] string CurrentPassword,[Required,MinLength(8),MaxLength(100)] string NewPassword);
+public record EventRequest([Required,MaxLength(200)] string EventName,string? Description,[Required] DateTime EventDate,[Required,MaxLength(255)] string Location);
+public record EventResponse(int EventID,string EventName,string? Description,DateTime EventDate,string Location,string Status,int OrganiserID);
+public record CategoryRequest([Required,MaxLength(150)] string CategoryName,[Range(typeof(decimal),"0.01","9999")] decimal DistanceKm);
+public record CategoryResponse(int CategoryID,string CategoryName,decimal DistanceKm,int CreatedByUserID);
+public record OfferingRequest([Range(typeof(decimal),"0","999999")] decimal EntryFee,[Range(1,1000000)] int Capacity);
+public record OfferingResponse(int EventID,int CategoryID,string EventName,string CategoryName,decimal DistanceKm,decimal EntryFee,int Capacity,int ConfirmedEnrolments);
+public record EnrolmentRequest([Range(1,int.MaxValue)] int EventID,[Range(1,int.MaxValue)] int CategoryID);
+public record EnrolmentResponse(int EnrolmentID,int EventID,string EventName,int CategoryID,string CategoryName,int ParticipantID,string ParticipantName,DateTime EnrolmentDate,string Status);
+public record ResultRequest(TimeSpan? FinishTime,int? Position,[Required] string Status="Recorded");
+public record ResultResponse(int ResultID,int EnrolmentID,int ParticipantID,string ParticipantName,int EventID,string EventName,string CategoryName,TimeSpan? FinishTime,int? Position,string Status,DateTime RecordedAt);
